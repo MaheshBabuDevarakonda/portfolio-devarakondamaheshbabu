@@ -204,6 +204,28 @@
       .hero-text h1 { font-size: 1.9rem; }
       .hero-video-wrapper { height: 350px; }
     }
+
+    /* ── Experience & Education Timeline ── */
+    .timeline-container { display: flex; flex-direction: column; gap: 24px; margin-top: 20px; }
+    .timeline-card {
+      background: var(--bg-card); border: 1px solid rgba(255,255,255,0.06); border-radius: 16px;
+      padding: 30px; transition: all 0.3s; text-align: left;
+    }
+    .timeline-card:hover { transform: translateY(-4px); border-color: var(--primary); box-shadow: var(--glow); }
+    .timeline-header { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 12px; margin-bottom: 16px; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 14px; }
+    .timeline-header h3 { font-size: 1.35rem; font-weight: 700; color: var(--text); }
+    .timeline-header h3 a { color: var(--primary); text-decoration: none; transition: color 0.3s; }
+    .timeline-header h3 a:hover { color: var(--accent); }
+    .timeline-header .company-meta { display: flex; flex-direction: column; align-items: flex-end; text-align: right; }
+    @media (max-width: 768px) {
+      .timeline-header .company-meta { align-items: flex-start; text-align: left; }
+    }
+    .timeline-header .role-title { font-size: 1.05rem; color: var(--accent); font-weight: 600; margin-top: 4px; }
+    .timeline-header .date-loc { font-size: 0.9rem; color: var(--text-muted); font-weight: 500; }
+    .timeline-body ul { padding-left: 20px; color: var(--text-muted); line-height: 1.8; font-size: 0.95rem; }
+    .timeline-body ul li { margin-bottom: 8px; }
+    .timeline-body ul li strong { color: var(--text); }
+    .timeline-body ul li b { color: var(--accent); }
   </style>
 </head>
 <body>
@@ -214,8 +236,11 @@
     <ul class="nav-links" id="navLinks">
       <li><a href="#hero">Home</a></li>
       <li><a href="#about">About</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#education">Education</a></li>
       <li><a href="#skills">Skills</a></li>
       <li><a href="#projects">Projects</a></li>
+      <li><a href="#achievements">Achievements</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
     <button class="menu-toggle" id="menuToggle"><i class="fas fa-bars"></i></button>
@@ -231,25 +256,21 @@
         <div class="role">A <span id="typed"></span><span class="cursor-blink">|</span></div>
         <p>Self-driven, quick learner, passionate developer who enjoys building full-stack web apps and data-driven tools that solve real-world problems.</p>
         <div class="hero-socials">
-          <a href="https://linkedin.com/in/devarakondamaheshbabu" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-          <a href="https://github.com/devarakondamaheshbabu" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
-          <a href="mailto:devarakondamaheshbabu@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+          <a href="https://linkedin.com/in/maheshbabudevarakonda" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="https://github.com/MaheshBabuDevarakonda" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+          <a href="mailto:devarakondamaheshbabu237@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
         </div>
         <div class="hero-buttons">
           <a href="#about" class="btn btn-primary"><i class="fas fa-user"></i> Read More</a>
+          <a href="../assets/resume/aiagentresume.pdf" target="_blank" class="btn btn-outline"><i class="fas fa-file-pdf"></i> Resume</a>
           <a href="#contact" class="btn btn-outline"><i class="fas fa-paper-plane"></i> Contact Me</a>
         </div>
       </div>
 
       <!-- VIDEO instead of photo -->
       <div class="hero-video-wrapper">
-        <!--
-          ▶ HOW TO ADD YOUR VIDEO:
-          1. Place your video file (e.g. intro.mp4) in this same folder
-          2. Update the <source src="intro.mp4"> below with your filename
-        -->
         <video id="heroVideo" loop muted playsinline poster="">
-          <source src="intro.mp4" type="video/mp4">
+          <source src="../assets/video/hero-video.mp4" type="video/mp4">
           Your browser does not support the video tag.
         </video>
         <button class="play-btn" id="playBtn" aria-label="Play video">
@@ -267,19 +288,101 @@
     <p class="section-subtitle fade-in">Get to know me better</p>
     <div class="about-grid">
       <div class="about-text fade-in">
-        <p>I'm a passionate full-stack developer with a strong foundation in React, Python, and modern web technologies. I love transforming ideas into elegant, efficient digital solutions.</p>
-        <p>With experience in building production-ready applications and data-driven tools, I thrive on solving complex problems and continuously learning new technologies to stay ahead in the ever-evolving tech landscape.</p>
+        <p>I am a Computer Science student specializing in Data Science at Anil Neerukonda Institute of Technology and Sciences, Visakhapatnam, graduating in 2026. I am passionate about full-stack engineering, AI agents, and data analytics.</p>
+        <p>With hands-on experience building web applications, designing RESTful APIs, and implementing deep learning pipelines, I enjoy working on solutions that are robust, highly performant, and visual.</p>
         <div class="stats">
           <div class="stat"><div class="num">5+</div><div class="label">Projects</div></div>
-          <div class="stat"><div class="num">3+</div><div class="label">Technologies</div></div>
-          <div class="stat"><div class="num">1+</div><div class="label">Years Learning</div></div>
+          <div class="stat"><div class="num">15+</div><div class="label">Technologies</div></div>
+          <div class="stat"><div class="num">2</div><div class="label">Internships</div></div>
         </div>
       </div>
       <div class="about-text fade-in">
-        <p><strong style="color:var(--accent);">Education:</strong> B.Tech in Computer Science</p>
-        <p><strong style="color:var(--accent);">Interests:</strong> Full-Stack Development, Data Analysis, Automation, Machine Learning</p>
-        <p><strong style="color:var(--accent);">Goal:</strong> To build impactful software solutions and grow as a professional developer contributing to innovative teams.</p>
+        <p><strong style="color:var(--accent);">Education:</strong> B.Tech in Computer Science &amp; Engineering – Data Science (CGPA: 8.53/10.0)</p>
+        <p><strong style="color:var(--accent);">Interests:</strong> Full-Stack Development, Machine Learning, Data Analytics, Solo Travel, Content Creation</p>
+        <p><strong style="color:var(--accent);">Goal:</strong> To build state-of-the-art software solutions and grow as a professional developer contributing to innovative engineering teams.</p>
       </div>
+    </div>
+  </section>
+
+  <!-- Experience Section -->
+  <section class="section" id="experience">
+    <h2 class="section-title fade-in"><span>My</span> Experience</h2>
+    <p class="section-subtitle fade-in">Where I have worked</p>
+    <div class="timeline-container">
+      
+      <!-- SmartEye3i -->
+      <div class="timeline-card fade-in">
+        <div class="timeline-header">
+          <div>
+            <h3><a href="https://smarteye3i.com/" target="_blank">SmartEye3i (Product-Based Company)</a></h3>
+            <div class="role-title">AI/ML Intern</div>
+          </div>
+          <div class="company-meta">
+            <span class="date-loc">3 Months</span>
+            <span class="date-loc">Hyderabad, Telangana</span>
+          </div>
+        </div>
+        <div class="timeline-body">
+          <ul>
+            <li>Led AI/ML development for <strong>PathPal</strong>, an assistive technology product enabling real-time navigation and accessibility features for individuals with disabilities.</li>
+            <li>Designed, trained, and deployed core predictive models; took full ownership of the AI pipeline from data preprocessing through production deployment.</li>
+            <li>Optimized data processing workflows, improving model inference speed and establishing a scalable foundational AI architecture for the live product.</li>
+            <li>Collaborated in an Agile environment, delivering iterative model improvements aligned with product milestones and stakeholder feedback.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Learnflu -->
+      <div class="timeline-card fade-in">
+        <div class="timeline-header">
+          <div>
+            <h3><a href="https://learnflu.com" target="_blank">Learnflu</a></h3>
+            <div class="role-title">Full Stack Web Developer Intern</div>
+          </div>
+          <div class="company-meta">
+            <span class="date-loc">2024</span>
+            <span class="date-loc">Remote</span>
+          </div>
+        </div>
+        <div class="timeline-body">
+          <ul>
+            <li>Built and maintained full-stack web features using <strong>React, Node.js, and Express</strong>.</li>
+            <li>Designed RESTful API endpoints and integrated <strong>MongoDB</strong> for flexible data storage.</li>
+            <li>Implemented <strong>JWT-based authentication</strong> flows to secure user sessions.</li>
+            <li>Participated in agile sprints, code reviews, and deployment pipelines.</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Education Section -->
+  <section class="section" id="education">
+    <h2 class="section-title fade-in"><span>My</span> Education</h2>
+    <p class="section-subtitle fade-in">Academic background</p>
+    <div class="timeline-container">
+
+      <!-- University -->
+      <div class="timeline-card fade-in">
+        <div class="timeline-header">
+          <div>
+            <h3>Anil Neerukonda Institute of Technology and Sciences</h3>
+            <div class="role-title">Bachelor of Technology in Computer Science &amp; Engineering – Data Science</div>
+          </div>
+          <div class="company-meta">
+            <span class="date-loc">2022 – 2026</span>
+            <span class="date-loc">Visakhapatnam, AP</span>
+          </div>
+        </div>
+        <div class="timeline-body">
+          <ul>
+            <li>Consistently maintained an excellent academic standing with a CGPA of <strong>8.53 / 10.0</strong>.</li>
+            <li><strong>Relevant Courseworks:</strong> Data Structures and Algorithms, Database Management Systems, Machine Learning, Web Technologies, Statistics for Data Science.</li>
+          </ul>
+        </div>
+      </div>
+
     </div>
   </section>
 
@@ -288,13 +391,15 @@
     <h2 class="section-title fade-in"><span>My</span> Skills</h2>
     <p class="section-subtitle fade-in">Technologies I work with</p>
     <div class="skills-grid">
-      <div class="skill-card fade-in"><i class="fab fa-react"></i><p>React</p></div>
+      <div class="skill-card fade-in"><i class="fab fa-react"></i><p>React.js</p></div>
       <div class="skill-card fade-in"><i class="fab fa-js-square"></i><p>JavaScript</p></div>
       <div class="skill-card fade-in"><i class="fab fa-python"></i><p>Python</p></div>
-      <div class="skill-card fade-in"><i class="fab fa-html5"></i><p>HTML5</p></div>
-      <div class="skill-card fade-in"><i class="fab fa-css3-alt"></i><p>CSS3</p></div>
+      <div class="skill-card fade-in"><i class="fab fa-java"></i><p>Java</p></div>
+      <div class="skill-card fade-in"><i class="fas fa-server"></i><p>FastAPI</p></div>
       <div class="skill-card fade-in"><i class="fab fa-node-js"></i><p>Node.js</p></div>
       <div class="skill-card fade-in"><i class="fas fa-database"></i><p>MongoDB</p></div>
+      <div class="skill-card fade-in"><i class="fas fa-table"></i><p>PostgreSQL</p></div>
+      <div class="skill-card fade-in"><i class="fas fa-chart-line"></i><p>Power BI</p></div>
       <div class="skill-card fade-in"><i class="fab fa-git-alt"></i><p>Git</p></div>
     </div>
   </section>
@@ -305,28 +410,58 @@
     <p class="section-subtitle fade-in">Some things I've built</p>
     <div class="projects-grid">
       <div class="project-card fade-in">
-        <div class="project-img">🌾</div>
+        <div class="project-img">🎓</div>
         <div class="project-body">
-          <h3>FarmNet</h3>
-          <p>A full-stack agricultural platform with ensemble ML pipeline, FastAPI backend, and MongoDB for crop disease prediction and recommendations.</p>
-          <div class="project-tags"><span>Python</span><span>FastAPI</span><span>MongoDB</span><span>ML</span></div>
+          <h3>ScholarScan AI</h3>
+          <p>B2B/B2C AI assistant screening profile eligibility for international admissions. Designed responsive dark-theme glassmorphism UI with progress score rings and served via FastAPI + Uvicorn.</p>
+          <div class="project-tags"><span>FastAPI</span><span>Gemini AI</span><span>Python</span><span>Uvicorn</span></div>
         </div>
       </div>
       <div class="project-card fade-in">
-        <div class="project-img">💼</div>
+        <div class="project-img">🌾</div>
         <div class="project-body">
-          <h3>Job Management System</h3>
-          <p>Full-stack job management platform with user authentication, job tracking, and data visualization dashboard.</p>
-          <div class="project-tags"><span>React</span><span>Node.js</span><span>MongoDB</span></div>
+          <h3>FarmNet</h3>
+          <p>Smart farming system with crop disease detection utilizing ResNet50, DenseNet121, and EfficientNetB5 (94.89% accuracy), integrated into a FastAPI backend with structured MongoDB schema.</p>
+          <div class="project-tags"><span>Python</span><span>TensorFlow</span><span>FastAPI</span><span>MongoDB</span></div>
+        </div>
+      </div>
+      <div class="project-card fade-in">
+        <div class="project-img">🏠</div>
+        <div class="project-body">
+          <h3>RealEstateHub</h3>
+          <p>A full-stack real estate web platform to manage property listings and user interactions with integrated Google Maps API for property location tracking and spatial visualization.</p>
+          <div class="project-tags"><span>MongoDB</span><span>Express</span><span>React</span><span>Node.js</span></div>
         </div>
       </div>
       <div class="project-card fade-in">
         <div class="project-img">🚗</div>
         <div class="project-body">
           <h3>Road Accident Analysis</h3>
-          <p>Data analysis project with CSV-to-MySQL pipeline, statistical analysis, and visualization using Python and Pandas.</p>
-          <div class="project-tags"><span>Python</span><span>Pandas</span><span>MySQL</span><span>Matplotlib</span></div>
+          <p>Ingestion and cleaning of 433,000+ accident records from NCRB/data.gov.in. Performed EDA to identify high-risk zones, and delivered interactive Power BI and Excel dashboards with safety insights.</p>
+          <div class="project-tags"><span>Python</span><span>SQL</span><span>Power BI</span><span>Pandas</span><span>NumPy</span></div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Achievements Section -->
+  <section class="section" id="achievements">
+    <h2 class="section-title fade-in"><span>Achievements</span> &amp; Certifications</h2>
+    <p class="section-subtitle fade-in">Highlights of my learning and success</p>
+    <div class="projects-grid">
+      <div class="project-card fade-in" style="padding: 30px;">
+        <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 12px; color: var(--accent);">Certifications</h3>
+        <ul style="padding-left: 20px; color: var(--text-muted); line-height: 1.9; font-size: 0.95rem; list-style-type: disc;">
+          <li style="margin-bottom: 10px;"><strong>Large Language Models (LLM)</strong> – NPTEL, IIT Madras (2024)</li>
+          <li style="margin-bottom: 10px;"><strong>Full Stack Web Development</strong> – Learnflu (2024)</li>
+        </ul>
+      </div>
+      <div class="project-card fade-in" style="padding: 30px;">
+        <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 12px; color: var(--accent);">Achievements &amp; Activities</h3>
+        <ul style="padding-left: 20px; color: var(--text-muted); line-height: 1.9; font-size: 0.95rem; list-style-type: disc;">
+          <li style="margin-bottom: 10px;"><strong>Algorithmic Problem Solving:</strong> Consistently maintained a daily Data Structures and Algorithms (DSA) streak on LeetCode using Java.</li>
+          <li style="margin-bottom: 10px;"><strong>Technical Publications:</strong> Authored and successfully submitted a technical research paper to an online academic platform (April 2026).</li>
+        </ul>
       </div>
     </div>
   </section>
@@ -339,19 +474,19 @@
       <div class="contact-info fade-in">
         <div class="contact-item">
           <div class="icon-box"><i class="fas fa-envelope"></i></div>
-          <div><h4>Email</h4><p>devarakondamaheshbabu@gmail.com</p></div>
+          <div><h4>Email</h4><p><a href="mailto:devarakondamaheshbabu237@gmail.com" style="color:var(--text-muted); text-decoration:none;">devarakondamaheshbabu237@gmail.com</a></p></div>
         </div>
         <div class="contact-item">
           <div class="icon-box"><i class="fab fa-linkedin-in"></i></div>
-          <div><h4>LinkedIn</h4><p>devarakondamaheshbabu</p></div>
+          <div><h4>LinkedIn</h4><p><a href="https://linkedin.com/in/maheshbabudevarakonda" target="_blank" style="color:var(--text-muted); text-decoration:none;">maheshbabudevarakonda</a></p></div>
         </div>
         <div class="contact-item">
           <div class="icon-box"><i class="fab fa-github"></i></div>
-          <div><h4>GitHub</h4><p>devarakondamaheshbabu</p></div>
+          <div><h4>GitHub</h4><p><a href="https://github.com/MaheshBabuDevarakonda" target="_blank" style="color:var(--text-muted); text-decoration:none;">MaheshBabuDevarakonda</a></p></div>
         </div>
         <div class="contact-item">
           <div class="icon-box"><i class="fas fa-map-marker-alt"></i></div>
-          <div><h4>Location</h4><p>India</p></div>
+          <div><h4>Location</h4><p>Hyderabad, Telangana, India</p></div>
         </div>
       </div>
       <form class="contact-form fade-in" id="contactForm">
