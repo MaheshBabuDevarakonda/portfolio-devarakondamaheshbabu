@@ -19,16 +19,16 @@
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
-      --primary: #6366f1;
-      --primary-dark: #4f46e5;
+      --primary: #002aff;
+      --primary-dark: #001fd6;
       --accent: #f59e0b;
       --bg-dark: #08070b;
       --bg-card: rgba(255, 255, 255, 0.03);
       --card-border: rgba(255, 255, 255, 0.06);
       --text: #f8fafc;
       --text-muted: #94a3b8;
-      --gradient: linear-gradient(135deg, #4f46e5 0%, #6366f1 50%, #3b82f6 100%);
-      --glow: 0 0 35px rgba(99, 102, 241, 0.25);
+      --gradient: linear-gradient(135deg, #001aff 0%, #0055ff 50%, #00a2ff 100%);
+      --glow: 0 0 35px rgba(0, 42, 255, 0.3);
     }
 
     html { scroll-behavior: smooth; }
@@ -95,35 +95,28 @@
     .btn-outline { background: transparent; color: var(--text); border: 2px solid var(--card-border); }
     .btn-outline:hover { border-color: var(--primary); color: var(--text); transform: translateY(-2px); box-shadow: var(--glow); }
 
-    /* ── Video Card ── */
-    .hero-video-wrapper {
+    /* ── Image Card ── */
+    .hero-image-wrapper {
       flex: 0 0 420px; height: 480px; border-radius: 20px; overflow: hidden; position: relative;
-      background: linear-gradient(145deg, rgba(99, 102, 241, 0.15), rgba(59, 130, 246, 0.1));
+      background: linear-gradient(145deg, rgba(0, 42, 255, 0.15), rgba(0, 85, 255, 0.1));
       border: 1px solid var(--card-border); box-shadow: 0 20px 60px rgba(0,0,0,0.4), var(--glow);
     }
-    .hero-video-wrapper video {
+    .hero-image-wrapper img {
       width: 100%; height: 100%; object-fit: cover; display: block;
+      transition: transform 0.5s ease;
     }
-    .video-overlay {
+    .hero-image-wrapper:hover img {
+      transform: scale(1.05);
+    }
+    .image-overlay {
       position: absolute; inset: 0; background: linear-gradient(to top, rgba(8, 7, 11, 0.7) 0%, transparent 40%);
       pointer-events: none;
     }
-    .video-caption {
+    .image-caption {
       position: absolute; bottom: 20px; left: 0; right: 0; text-align: center;
       font-size: 1rem; font-weight: 600; letter-spacing: 1px; color: var(--text);
       text-shadow: 0 2px 8px rgba(0,0,0,0.6);
     }
-    /* Play button overlay when video not playing */
-    .play-btn {
-      position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
-      width: 70px; height: 70px; border-radius: 50%; border: none; cursor: pointer;
-      background: rgba(255,255,255,0.15); backdrop-filter: blur(10px);
-      display: flex; align-items: center; justify-content: center;
-      transition: all 0.3s; z-index: 2;
-    }
-    .play-btn i { color: #fff; font-size: 1.6rem; margin-left: 4px; }
-    .play-btn:hover { background: var(--primary); transform: translate(-50%,-50%) scale(1.1); }
-    .play-btn.hidden { opacity: 0; pointer-events: none; }
 
     /* Floating particles */
     .particles { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
@@ -156,6 +149,7 @@
     .skill-card {
       background: var(--bg-card); border: 1px solid var(--card-border); border-radius: 14px;
       padding: 28px 16px; text-align: center; transition: all 0.3s;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
     }
     .skill-card:hover { transform: translateY(-6px); border-color: var(--primary); box-shadow: var(--glow); }
     .skill-card i { font-size: 2rem; margin-bottom: 10px; color: var(--primary); }
@@ -241,6 +235,22 @@
     .timeline-body ul li { margin-bottom: 8px; }
     .timeline-body ul li strong { color: var(--text); }
     .timeline-body ul li b { color: var(--accent); }
+
+    /* ── Company Logos ── */
+    .company-logo-wrapper {
+      width: 50px; height: 50px; border-radius: 8px; overflow: hidden; background: #fff;
+      display: flex; align-items: center; justify-content: center; border: 1px solid var(--card-border);
+      flex-shrink: 0;
+    }
+    .company-logo {
+      width: 85%; height: 85%; object-fit: contain;
+    }
+    .tech-icon {
+      width: 42px;
+      height: 42px;
+      object-fit: contain;
+      margin-bottom: 12px;
+    }
   </style>
 </head>
 <body>
@@ -282,17 +292,11 @@
         </div>
       </div>
 
-      <!-- VIDEO instead of photo -->
-      <div class="hero-video-wrapper">
-        <video id="heroVideo" loop muted playsinline poster="">
-          <source src="assets/video/hero-video.mp4" type="video/mp4">
-          Your browser does not support the video tag.
-        </video>
-        <button class="play-btn" id="playBtn" aria-label="Play video">
-          <i class="fas fa-play"></i>
-        </button>
-        <div class="video-overlay"></div>
-        <div class="video-caption">Devarakonda Mahesh Babu</div>
+      <!-- Profile Photo -->
+      <div class="hero-image-wrapper">
+        <img src="assets/img/my-passport-photo-square.jpg" alt="Devarakonda Mahesh Babu" />
+        <div class="image-overlay"></div>
+        <div class="image-caption">Devarakonda Mahesh Babu</div>
       </div>
     </div>
   </section>
@@ -328,9 +332,14 @@
       <!-- SmartEye3i -->
       <div class="timeline-card fade-in">
         <div class="timeline-header">
-          <div>
-            <h3><a href="https://smarteye3i.com/" target="_blank">SmartEye3i (Product-Based Company)</a></h3>
-            <div class="role-title">AI/ML Intern</div>
+          <div style="display: flex; align-items: center; gap: 15px;">
+            <div class="company-logo-wrapper">
+              <img src="https://img1.wsimg.com/isteam/ip/892fb95e-d686-437d-bcc1-80eecfb1f2d9/TRADEMARK%20LOGO%20(5).png" alt="SmartEye3i Logo" class="company-logo">
+            </div>
+            <div>
+              <h3><a href="https://smarteye3i.com/" target="_blank">SmartEye3i (Product-Based Company)</a></h3>
+              <div class="role-title">AI/ML Intern</div>
+            </div>
           </div>
           <div class="company-meta">
             <span class="date-loc">3 Months</span>
@@ -350,9 +359,14 @@
       <!-- Learnflu -->
       <div class="timeline-card fade-in">
         <div class="timeline-header">
-          <div>
-            <h3><a href="https://learnflu.com" target="_blank">Learnflu</a></h3>
-            <div class="role-title">Full Stack Web Developer Intern</div>
+          <div style="display: flex; align-items: center; gap: 15px;">
+            <div class="company-logo-wrapper">
+              <img src="https://learnflu.com/wp-content/uploads/2025/08/LEARN-FLU-LOGO.webp" alt="Learnflu Logo" class="company-logo">
+            </div>
+            <div>
+              <h3><a href="https://learnflu.com" target="_blank">Learnflu</a></h3>
+              <div class="role-title">Full Stack Web Developer Intern</div>
+            </div>
           </div>
           <div class="company-meta">
             <span class="date-loc">2024</span>
@@ -406,16 +420,16 @@
     <h2 class="section-title fade-in"><span>My</span> Skills</h2>
     <p class="section-subtitle fade-in">Technologies I work with</p>
     <div class="skills-grid">
-      <div class="skill-card fade-in"><i class="fab fa-react"></i><p>React.js</p></div>
-      <div class="skill-card fade-in"><i class="fab fa-js-square"></i><p>JavaScript</p></div>
-      <div class="skill-card fade-in"><i class="fab fa-python"></i><p>Python</p></div>
-      <div class="skill-card fade-in"><i class="fab fa-java"></i><p>Java</p></div>
-      <div class="skill-card fade-in"><i class="fas fa-server"></i><p>FastAPI</p></div>
-      <div class="skill-card fade-in"><i class="fab fa-node-js"></i><p>Node.js</p></div>
-      <div class="skill-card fade-in"><i class="fas fa-database"></i><p>MongoDB</p></div>
-      <div class="skill-card fade-in"><i class="fas fa-table"></i><p>PostgreSQL</p></div>
-      <div class="skill-card fade-in"><i class="fas fa-chart-line"></i><p>Power BI</p></div>
-      <div class="skill-card fade-in"><i class="fab fa-git-alt"></i><p>Git</p></div>
+      <div class="skill-card fade-in"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React" class="tech-icon"><p>React.js</p></div>
+      <div class="skill-card fade-in"><img src="assets/img/javascript.png" alt="JavaScript" class="tech-icon"><p>JavaScript</p></div>
+      <div class="skill-card fade-in"><img src="assets/img/python-logo-1.png" alt="Python" class="tech-icon"><p>Python</p></div>
+      <div class="skill-card fade-in"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java" class="tech-icon"><p>Java</p></div>
+      <div class="skill-card fade-in"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastapi/fastapi-original.svg" alt="FastAPI" class="tech-icon"><p>FastAPI</p></div>
+      <div class="skill-card fade-in"><img src="assets/img/nodejs.png" alt="Node.js" class="tech-icon"><p>Node.js</p></div>
+      <div class="skill-card fade-in"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" alt="MongoDB" class="tech-icon"><p>MongoDB</p></div>
+      <div class="skill-card fade-in"><img src="assets/img/postgresql.png" alt="PostgreSQL" class="tech-icon"><p>PostgreSQL</p></div>
+      <div class="skill-card fade-in"><img src="https://upload.wikimedia.org/wikipedia/commons/c/cf/New_Power_BI_Logo.svg" alt="Power BI" class="tech-icon"><p>Power BI</p></div>
+      <div class="skill-card fade-in"><img src="assets/img/git.png" alt="Git" class="tech-icon"><p>Git</p></div>
     </div>
   </section>
 
@@ -542,28 +556,6 @@
       setTimeout(typeEffect, deleting ? 40 : 80);
     }
     typeEffect();
-
-    // ── Video play/pause ──
-    const video = document.getElementById('heroVideo');
-    const playBtn = document.getElementById('playBtn');
-    playBtn.addEventListener('click', () => {
-      if (video.paused) {
-        video.muted = false;
-        video.play();
-        playBtn.classList.add('hidden');
-      }
-    });
-    video.addEventListener('click', () => {
-      if (!video.paused) {
-        video.pause();
-        playBtn.classList.remove('hidden');
-      } else {
-        video.play();
-        playBtn.classList.add('hidden');
-      }
-    });
-    // Auto-play muted on load
-    video.play().catch(() => {});
 
     // ── Scroll fade-in animation ──
     const faders = document.querySelectorAll('.fade-in');
