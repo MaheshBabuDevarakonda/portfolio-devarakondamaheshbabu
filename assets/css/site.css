@@ -190,7 +190,8 @@ main {
   gap: 12px;
 }
 
-.hero-photo img {
+.hero-photo img,
+.hero-photo video {
   width: min(420px, 34vw);
   aspect-ratio: 3 / 4;
   height: auto;
@@ -199,7 +200,104 @@ main {
   border: 3px solid rgba(255, 255, 255, 0.25);
   box-shadow: 0 18px 50px rgba(0, 0, 0, 0.28);
   background: rgba(255, 255, 255, 0.06);
+  display: block;
 }
+
+.video-wrapper {
+  position: relative;
+  flex: 0 0 auto;
+  line-height: 0;
+  border-radius: 18px;
+  overflow: hidden;
+}
+
+/* ── Custom video controls ── */
+.vid-controls {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(transparent, rgba(0,0,0,0.72));
+  padding: 10px 12px 10px;
+  border-radius: 0 0 18px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  opacity: 0;
+  transition: opacity 0.25s;
+  z-index: 10;
+}
+
+.video-wrapper:hover .vid-controls {
+  opacity: 1;
+}
+
+/* Timeline */
+.vid-timeline {
+  position: relative;
+  height: 4px;
+  background: rgba(255,255,255,0.25);
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+.vid-seek {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+  margin: 0;
+  z-index: 2;
+}
+
+.vid-progress {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0%;
+  background: var(--accent);
+  border-radius: 2px;
+  pointer-events: none;
+  transition: width 0.1s linear;
+}
+
+/* Buttons row */
+.vid-buttons {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.vid-btn {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 0.95rem;
+  cursor: pointer;
+  padding: 2px 4px;
+  display: flex;
+  align-items: center;
+  transition: color 0.2s, transform 0.15s;
+  line-height: 1;
+}
+
+.vid-btn:hover {
+  color: var(--accent);
+  transform: scale(1.15);
+}
+
+.vid-time {
+  color: rgba(255,255,255,0.85);
+  font-size: 0.72rem;
+  font-family: "Nunito", sans-serif;
+  letter-spacing: 0.03em;
+  flex: 1;
+  text-align: center;
+}
+
 
 .hero-photo-name {
   color: rgba(255, 255, 255, 0.9);

@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Devarakonda Mahesh Babu | AI Enginner Portfolio</title>
+  <meta name="description" content="Portfolio of Devarakonda Mahesh Babu - A passionate full-stack developer building web apps and data-driven tools.">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --primary: #4361ee;
+      --primary-dark: #3a0ca3;
+      --accent: #f0a500;
+      --bg-dark: #0f0e17;
+      --bg-card: rgba(255,255,255,0.05);
+      --text: #fffffe;
+      --text-muted: #a7a9be;
+      --gradient: linear-gradient(135deg, #3a0ca3 0%, #4361ee 50%, #4cc9f0 100%);
+      --glow: 0 0 30px rgba(67,97,238,0.3);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: var(--bg-dark);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    /* ── Navbar ── */
+    .navbar {
+      position: fixed; top: 0; left: 0; width: 100%; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 18px 6%; backdrop-filter: blur(16px);
+      background: rgba(15,14,23,0.75); border-bottom: 1px solid rgba(255,255,255,0.06);
+      transition: background 0.3s;
+    }
+    .navbar .logo { font-size: 1.5rem; font-weight: 700; background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links a { color: var(--text-muted); text-decoration: none; font-weight: 500; transition: color 0.3s; position: relative; }
+    .nav-links a:hover { color: var(--text); }
+    .nav-links a::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px; background: var(--accent); transition: width 0.3s; }
+    .nav-links a:hover::after { width: 100%; }
+    .menu-toggle { display: none; font-size: 1.5rem; color: var(--text); cursor: pointer; background: none; border: none; }
+
+    /* ── Hero ── */
+    .hero {
+      min-height: 100vh; display: flex; align-items: center; justify-content: center;
+      padding: 120px 6% 60px; position: relative;
+      background: radial-gradient(ellipse at 30% 50%, rgba(58,12,163,0.35) 0%, transparent 60%),
+                  radial-gradient(ellipse at 80% 30%, rgba(67,97,238,0.2) 0%, transparent 50%);
+    }
+    .hero-content { display: flex; align-items: center; justify-content: space-between; max-width: 1200px; width: 100%; gap: 60px; }
+    .hero-text { flex: 1; }
+    .hero-text .greeting { font-size: 1.1rem; color: var(--accent); font-weight: 500; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; }
+    .hero-text h1 { font-size: 3.2rem; font-weight: 800; line-height: 1.15; margin-bottom: 8px; }
+    .hero-text h1 .highlight { background: var(--accent); color: var(--bg-dark); padding: 2px 12px; border-radius: 6px; }
+    .hero-text .role { font-size: 1.4rem; color: var(--primary); font-weight: 600; margin-bottom: 16px; min-height: 36px; }
+    .role .cursor-blink { animation: blink 0.7s infinite; }
+    @keyframes blink { 0%,100%{ opacity:1; } 50%{ opacity:0; } }
+    .hero-text p { color: var(--text-muted); font-size: 1.05rem; line-height: 1.7; max-width: 500px; margin-bottom: 28px; }
+    .hero-socials { display: flex; gap: 14px; margin-bottom: 28px; }
+    .hero-socials a {
+      width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      background: var(--bg-card); border: 1px solid rgba(255,255,255,0.1); color: var(--text); font-size: 1.1rem;
+      transition: all 0.3s;
+    }
+    .hero-socials a:hover { background: var(--primary); border-color: var(--primary); transform: translateY(-3px); box-shadow: var(--glow); }
+    .hero-buttons { display: flex; gap: 16px; flex-wrap: wrap; }
+    .btn {
+      padding: 12px 32px; border-radius: 8px; font-family: inherit; font-size: 1rem; font-weight: 600;
+      cursor: pointer; transition: all 0.3s; text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
+    }
+    .btn-primary { background: var(--gradient); color: #fff; border: none; box-shadow: var(--glow); }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(67,97,238,0.45); }
+    .btn-outline { background: transparent; color: var(--text); border: 2px solid rgba(255,255,255,0.2); }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+
+    /* ── Video Card ── */
+    .hero-video-wrapper {
+      flex: 0 0 420px; height: 480px; border-radius: 20px; overflow: hidden; position: relative;
+      background: linear-gradient(145deg, rgba(67,97,238,0.2), rgba(58,12,163,0.3));
+      border: 2px solid rgba(255,255,255,0.08); box-shadow: 0 20px 60px rgba(0,0,0,0.4), var(--glow);
+    }
+    .hero-video-wrapper video {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+    }
+    .video-overlay {
+      position: absolute; inset: 0; background: linear-gradient(to top, rgba(15,14,23,0.7) 0%, transparent 40%);
+      pointer-events: none;
+    }
+    .video-caption {
+      position: absolute; bottom: 20px; left: 0; right: 0; text-align: center;
+      font-size: 1rem; font-weight: 600; letter-spacing: 1px; color: var(--text);
+      text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+    }
+    /* Play button overlay when video not playing */
+    .play-btn {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+      width: 70px; height: 70px; border-radius: 50%; border: none; cursor: pointer;
+      background: rgba(255,255,255,0.15); backdrop-filter: blur(10px);
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.3s; z-index: 2;
+    }
+    .play-btn i { color: #fff; font-size: 1.6rem; margin-left: 4px; }
+    .play-btn:hover { background: var(--primary); transform: translate(-50%,-50%) scale(1.1); }
+    .play-btn.hidden { opacity: 0; pointer-events: none; }
+
+    /* Floating particles */
+    .particles { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+    .particles span {
+      position: absolute; width: 4px; height: 4px; background: rgba(67,97,238,0.5); border-radius: 50%;
+      animation: float-up linear infinite;
+    }
+    @keyframes float-up {
+      0% { transform: translateY(100vh) scale(0); opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { transform: translateY(-10vh) scale(1); opacity: 0; }
+    }
+
+    /* ── About Section ── */
+    .section { padding: 100px 6%; max-width: 1200px; margin: 0 auto; }
+    .section-title { font-size: 2rem; font-weight: 700; margin-bottom: 12px; text-align: center; }
+    .section-title span { background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .section-subtitle { text-align: center; color: var(--text-muted); margin-bottom: 50px; font-size: 1.05rem; }
+
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
+    .about-text p { color: var(--text-muted); line-height: 1.8; margin-bottom: 16px; }
+    .stats { display: flex; gap: 30px; margin-top: 24px; }
+    .stat { text-align: center; }
+    .stat .num { font-size: 2rem; font-weight: 800; background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .stat .label { color: var(--text-muted); font-size: 0.85rem; }
+
+    /* ── Skills ── */
+    .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px,1fr)); gap: 20px; }
+    .skill-card {
+      background: var(--bg-card); border: 1px solid rgba(255,255,255,0.06); border-radius: 14px;
+      padding: 28px 16px; text-align: center; transition: all 0.3s;
+    }
+    .skill-card:hover { transform: translateY(-6px); border-color: var(--primary); box-shadow: var(--glow); }
+    .skill-card i { font-size: 2rem; margin-bottom: 10px; color: var(--primary); }
+    .skill-card p { font-weight: 500; font-size: 0.95rem; }
+
+    /* ── Projects ── */
+    .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px,1fr)); gap: 28px; }
+    .project-card {
+      background: var(--bg-card); border: 1px solid rgba(255,255,255,0.06); border-radius: 16px;
+      overflow: hidden; transition: all 0.3s;
+    }
+    .project-card:hover { transform: translateY(-6px); box-shadow: var(--glow); border-color: var(--primary); }
+    .project-img { height: 200px; background: linear-gradient(135deg, var(--primary-dark), var(--primary)); display: flex; align-items: center; justify-content: center; font-size: 3rem; }
+    .project-body { padding: 24px; }
+    .project-body h3 { font-size: 1.2rem; margin-bottom: 8px; }
+    .project-body p { color: var(--text-muted); font-size: 0.92rem; line-height: 1.6; margin-bottom: 16px; }
+    .project-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+    .project-tags span { background: rgba(67,97,238,0.15); color: var(--primary); padding: 4px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: 500; }
+
+    /* ── Contact ── */
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+    .contact-info { display: flex; flex-direction: column; gap: 24px; }
+    .contact-item { display: flex; align-items: center; gap: 16px; }
+    .contact-item .icon-box {
+      width: 50px; height: 50px; border-radius: 12px; background: var(--bg-card); border: 1px solid rgba(255,255,255,0.08);
+      display: flex; align-items: center; justify-content: center; color: var(--primary); font-size: 1.2rem;
+    }
+    .contact-item p { color: var(--text-muted); }
+    .contact-item h4 { margin-bottom: 2px; }
+    .contact-form { display: flex; flex-direction: column; gap: 16px; }
+    .contact-form input, .contact-form textarea {
+      background: var(--bg-card); border: 1px solid rgba(255,255,255,0.08); border-radius: 10px;
+      padding: 14px 18px; color: var(--text); font-family: inherit; font-size: 1rem; transition: border 0.3s; resize: vertical;
+    }
+    .contact-form input:focus, .contact-form textarea:focus { outline: none; border-color: var(--primary); }
+
+    /* ── Footer ── */
+    footer {
+      text-align: center; padding: 30px 6%; border-top: 1px solid rgba(255,255,255,0.06);
+      color: var(--text-muted); font-size: 0.9rem;
+    }
+
+    /* ── Animations ── */
+    .fade-in { opacity: 0; transform: translateY(30px); transition: all 0.7s ease; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── Responsive ── */
+    @media (max-width: 900px) {
+      .hero-content { flex-direction: column; text-align: center; }
+      .hero-text p { margin-left: auto; margin-right: auto; }
+      .hero-socials, .hero-buttons { justify-content: center; }
+      .hero-video-wrapper { flex: none; width: 100%; max-width: 380px; height: 420px; }
+      .hero-text h1 { font-size: 2.4rem; }
+      .about-grid, .contact-grid { grid-template-columns: 1fr; }
+      .stats { justify-content: center; }
+      .nav-links { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; width: 100%; background: rgba(15,14,23,0.95); padding: 20px 6%; gap: 20px; backdrop-filter: blur(16px); }
+      .nav-links.active { display: flex; }
+      .menu-toggle { display: block; }
+    }
+    @media (max-width: 500px) {
+      .hero-text h1 { font-size: 1.9rem; }
+      .hero-video-wrapper { height: 350px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar" id="navbar">
+    <div class="logo">Mahesh Babu</div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#hero">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <button class="menu-toggle" id="menuToggle"><i class="fas fa-bars"></i></button>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero" id="hero">
+    <div class="particles" id="particles"></div>
+    <div class="hero-content">
+      <div class="hero-text">
+        <p class="greeting">Welcome to my portfolio</p>
+        <h1>Hi, I'm <span class="highlight">Devarakonda</span></h1>
+        <div class="role">A <span id="typed"></span><span class="cursor-blink">|</span></div>
+        <p>Self-driven, quick learner, passionate developer who enjoys building full-stack web apps and data-driven tools that solve real-world problems.</p>
+        <div class="hero-socials">
+          <a href="https://linkedin.com/in/devarakondamaheshbabu" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="https://github.com/devarakondamaheshbabu" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+          <a href="mailto:devarakondamaheshbabu@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+        </div>
+        <div class="hero-buttons">
+          <a href="#about" class="btn btn-primary"><i class="fas fa-user"></i> Read More</a>
+          <a href="#contact" class="btn btn-outline"><i class="fas fa-paper-plane"></i> Contact Me</a>
+        </div>
+      </div>
+
+      <!-- VIDEO instead of photo -->
+      <div class="hero-video-wrapper">
+        <!--
+          ▶ HOW TO ADD YOUR VIDEO:
+          1. Place your video file (e.g. intro.mp4) in this same folder
+          2. Update the <source src="intro.mp4"> below with your filename
+        -->
+        <video id="heroVideo" loop muted playsinline poster="">
+          <source src="intro.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+        <button class="play-btn" id="playBtn" aria-label="Play video">
+          <i class="fas fa-play"></i>
+        </button>
+        <div class="video-overlay"></div>
+        <div class="video-caption">Devarakonda Mahesh Babu</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section class="section" id="about">
+    <h2 class="section-title fade-in"><span>About</span> Me</h2>
+    <p class="section-subtitle fade-in">Get to know me better</p>
+    <div class="about-grid">
+      <div class="about-text fade-in">
+        <p>I'm a passionate full-stack developer with a strong foundation in React, Python, and modern web technologies. I love transforming ideas into elegant, efficient digital solutions.</p>
+        <p>With experience in building production-ready applications and data-driven tools, I thrive on solving complex problems and continuously learning new technologies to stay ahead in the ever-evolving tech landscape.</p>
+        <div class="stats">
+          <div class="stat"><div class="num">5+</div><div class="label">Projects</div></div>
+          <div class="stat"><div class="num">3+</div><div class="label">Technologies</div></div>
+          <div class="stat"><div class="num">1+</div><div class="label">Years Learning</div></div>
+        </div>
+      </div>
+      <div class="about-text fade-in">
+        <p><strong style="color:var(--accent);">Education:</strong> B.Tech in Computer Science</p>
+        <p><strong style="color:var(--accent);">Interests:</strong> Full-Stack Development, Data Analysis, Automation, Machine Learning</p>
+        <p><strong style="color:var(--accent);">Goal:</strong> To build impactful software solutions and grow as a professional developer contributing to innovative teams.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills Section -->
+  <section class="section" id="skills">
+    <h2 class="section-title fade-in"><span>My</span> Skills</h2>
+    <p class="section-subtitle fade-in">Technologies I work with</p>
+    <div class="skills-grid">
+      <div class="skill-card fade-in"><i class="fab fa-react"></i><p>React</p></div>
+      <div class="skill-card fade-in"><i class="fab fa-js-square"></i><p>JavaScript</p></div>
+      <div class="skill-card fade-in"><i class="fab fa-python"></i><p>Python</p></div>
+      <div class="skill-card fade-in"><i class="fab fa-html5"></i><p>HTML5</p></div>
+      <div class="skill-card fade-in"><i class="fab fa-css3-alt"></i><p>CSS3</p></div>
+      <div class="skill-card fade-in"><i class="fab fa-node-js"></i><p>Node.js</p></div>
+      <div class="skill-card fade-in"><i class="fas fa-database"></i><p>MongoDB</p></div>
+      <div class="skill-card fade-in"><i class="fab fa-git-alt"></i><p>Git</p></div>
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section class="section" id="projects">
+    <h2 class="section-title fade-in"><span>My</span> Projects</h2>
+    <p class="section-subtitle fade-in">Some things I've built</p>
+    <div class="projects-grid">
+      <div class="project-card fade-in">
+        <div class="project-img">🌾</div>
+        <div class="project-body">
+          <h3>FarmNet</h3>
+          <p>A full-stack agricultural platform with ensemble ML pipeline, FastAPI backend, and MongoDB for crop disease prediction and recommendations.</p>
+          <div class="project-tags"><span>Python</span><span>FastAPI</span><span>MongoDB</span><span>ML</span></div>
+        </div>
+      </div>
+      <div class="project-card fade-in">
+        <div class="project-img">💼</div>
+        <div class="project-body">
+          <h3>Job Management System</h3>
+          <p>Full-stack job management platform with user authentication, job tracking, and data visualization dashboard.</p>
+          <div class="project-tags"><span>React</span><span>Node.js</span><span>MongoDB</span></div>
+        </div>
+      </div>
+      <div class="project-card fade-in">
+        <div class="project-img">🚗</div>
+        <div class="project-body">
+          <h3>Road Accident Analysis</h3>
+          <p>Data analysis project with CSV-to-MySQL pipeline, statistical analysis, and visualization using Python and Pandas.</p>
+          <div class="project-tags"><span>Python</span><span>Pandas</span><span>MySQL</span><span>Matplotlib</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="section" id="contact">
+    <h2 class="section-title fade-in"><span>Get In</span> Touch</h2>
+    <p class="section-subtitle fade-in">Let's work together</p>
+    <div class="contact-grid">
+      <div class="contact-info fade-in">
+        <div class="contact-item">
+          <div class="icon-box"><i class="fas fa-envelope"></i></div>
+          <div><h4>Email</h4><p>devarakondamaheshbabu@gmail.com</p></div>
+        </div>
+        <div class="contact-item">
+          <div class="icon-box"><i class="fab fa-linkedin-in"></i></div>
+          <div><h4>LinkedIn</h4><p>devarakondamaheshbabu</p></div>
+        </div>
+        <div class="contact-item">
+          <div class="icon-box"><i class="fab fa-github"></i></div>
+          <div><h4>GitHub</h4><p>devarakondamaheshbabu</p></div>
+        </div>
+        <div class="contact-item">
+          <div class="icon-box"><i class="fas fa-map-marker-alt"></i></div>
+          <div><h4>Location</h4><p>India</p></div>
+        </div>
+      </div>
+      <form class="contact-form fade-in" id="contactForm">
+        <input type="text" placeholder="Your Name" required id="contactName">
+        <input type="email" placeholder="Your Email" required id="contactEmail">
+        <textarea rows="5" placeholder="Your Message" required id="contactMessage"></textarea>
+        <button type="submit" class="btn btn-primary" style="justify-content:center;"><i class="fas fa-paper-plane"></i> Send Message</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2026 Devarakonda Mahesh Babu. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // ── Mobile menu toggle ──
+    document.getElementById('menuToggle').addEventListener('click', () => {
+      document.getElementById('navLinks').classList.toggle('active');
+    });
+
+    // ── Typing effect ──
+    const roles = ['React Developer', 'Full-Stack Developer', 'Python Developer', 'Problem Solver'];
+    let roleIdx = 0, charIdx = 0, deleting = false;
+    const typedEl = document.getElementById('typed');
+
+    function typeEffect() {
+      const current = roles[roleIdx];
+      typedEl.textContent = current.substring(0, charIdx);
+      if (!deleting) {
+        charIdx++;
+        if (charIdx > current.length) { deleting = true; setTimeout(typeEffect, 1500); return; }
+      } else {
+        charIdx--;
+        if (charIdx < 0) { deleting = false; roleIdx = (roleIdx + 1) % roles.length; charIdx = 0; setTimeout(typeEffect, 400); return; }
+      }
+      setTimeout(typeEffect, deleting ? 40 : 80);
+    }
+    typeEffect();
+
+    // ── Video play/pause ──
+    const video = document.getElementById('heroVideo');
+    const playBtn = document.getElementById('playBtn');
+    playBtn.addEventListener('click', () => {
+      if (video.paused) {
+        video.muted = false;
+        video.play();
+        playBtn.classList.add('hidden');
+      }
+    });
+    video.addEventListener('click', () => {
+      if (!video.paused) {
+        video.pause();
+        playBtn.classList.remove('hidden');
+      } else {
+        video.play();
+        playBtn.classList.add('hidden');
+      }
+    });
+    // Auto-play muted on load
+    video.play().catch(() => {});
+
+    // ── Scroll fade-in animation ──
+    const faders = document.querySelectorAll('.fade-in');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+    }, { threshold: 0.15 });
+    faders.forEach(f => observer.observe(f));
+
+    // ── Floating particles ──
+    const particlesEl = document.getElementById('particles');
+    for (let i = 0; i < 20; i++) {
+      const span = document.createElement('span');
+      span.style.left = Math.random() * 100 + '%';
+      span.style.animationDuration = (5 + Math.random() * 10) + 's';
+      span.style.animationDelay = Math.random() * 8 + 's';
+      span.style.width = span.style.height = (2 + Math.random() * 4) + 'px';
+      particlesEl.appendChild(span);
+    }
+
+    // ── Navbar links close mobile menu ──
+    document.querySelectorAll('.nav-links a').forEach(a => {
+      a.addEventListener('click', () => document.getElementById('navLinks').classList.remove('active'));
+    });
+  </script>
+</body>
+</html>

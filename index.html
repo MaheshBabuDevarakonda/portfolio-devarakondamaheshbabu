@@ -89,7 +89,32 @@
       </div>
 
       <div class="hero-photo">
-        <img src="assets/img/DSC_0893%5B1%5D%20-%20Copy.JPG" alt="Devarakonda Mahesh Babu portrait" />
+        <div class="video-wrapper">
+          <video id="heroVideo" autoplay loop playsinline>
+            <source src="assets/video/hero-video.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+
+          <!-- Custom Controls Bar -->
+          <div class="vid-controls" id="vidControls">
+            <!-- Timeline -->
+            <div class="vid-timeline">
+              <input type="range" id="vidSeek" class="vid-seek" value="0" min="0" step="0.1">
+              <div class="vid-progress" id="vidProgress"></div>
+            </div>
+
+            <!-- Buttons row -->
+            <div class="vid-buttons">
+              <button class="vid-btn" id="videoPlayPause" title="Play / Pause">
+                <i class="fa fa-pause" id="playPauseIcon"></i>
+              </button>
+              <span class="vid-time" id="vidTime">0:00 / 0:00</span>
+              <button class="vid-btn" id="vidMute" title="Mute / Unmute">
+                <i class="fa fa-volume-up" id="muteIcon"></i>
+              </button>
+            </div>
+          </div>
+        </div>
         <div class="hero-photo-name">Devarakonda Mahesh Babu</div>
       </div>
     </div>
@@ -402,6 +427,56 @@
       if (t) { e.preventDefault(); t.scrollIntoView({ behavior: "smooth" }); }
     });
   });
+
+  // ── Full Video Controls ──
+  const heroVideo     = document.getElementById('heroVideo');
+  const playPauseBtn  = document.getElementById('videoPlayPause');
+  const playPauseIcon = document.getElementById('playPauseIcon');
+  const vidMuteBtn    = document.getElementById('vidMute');
+  const muteIcon      = document.getElementById('muteIcon');
+  const vidSeek       = document.getElementById('vidSeek');
+  const vidProgress   = document.getElementById('vidProgress');
+  const vidTime       = document.getElementById('vidTime');
+
+  function fmtTime(s) {
+    const m = Math.floor(s / 60);
+    const sec = Math.floor(s % 60).toString().padStart(2, '0');
+    return m + ':' + sec;
+  }
+
+  if (heroVideo) {
+    // Play / Pause
+    playPauseBtn && playPauseBtn.addEventListener('click', () => {
+      if (heroVideo.paused) { heroVideo.play(); playPauseIcon.className = 'fa fa-pause'; }
+      else                  { heroVideo.pause(); playPauseIcon.className = 'fa fa-play'; }
+    });
+
+    // Mute / Unmute
+    vidMuteBtn && vidMuteBtn.addEventListener('click', () => {
+      heroVideo.muted = !heroVideo.muted;
+      muteIcon.className = heroVideo.muted ? 'fa fa-volume-off' : 'fa fa-volume-up';
+    });
+
+    // Update timeline & time as video plays
+    heroVideo.addEventListener('timeupdate', () => {
+      if (!heroVideo.duration) return;
+      const pct = (heroVideo.currentTime / heroVideo.duration) * 100;
+      if (vidProgress) vidProgress.style.width = pct + '%';
+      if (vidSeek)     vidSeek.value = heroVideo.currentTime;
+      if (vidTime)     vidTime.textContent = fmtTime(heroVideo.currentTime) + ' / ' + fmtTime(heroVideo.duration);
+    });
+
+    // Set seek range max once metadata loads
+    heroVideo.addEventListener('loadedmetadata', () => {
+      if (vidSeek) vidSeek.max = heroVideo.duration;
+      if (vidTime) vidTime.textContent = '0:00 / ' + fmtTime(heroVideo.duration);
+    });
+
+    // Scrub on seek input
+    vidSeek && vidSeek.addEventListener('input', () => {
+      heroVideo.currentTime = vidSeek.value;
+    });
+  }
 </script>
 </body>
 </html>
