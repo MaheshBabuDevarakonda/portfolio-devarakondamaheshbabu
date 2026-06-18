@@ -3,32 +3,47 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Devarakonda Mahesh Babu | AI Enginner Portfolio</title>
+  <title>Devarakonda Mahesh Babu | AI Engineer Portfolio</title>
   <meta name="description" content="Portfolio of Devarakonda Mahesh Babu - A passionate full-stack developer building web apps and data-driven tools.">
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Favicons -->
+  <link rel="apple-touch-icon" sizes="180x180" href="../assets/img/favicon/apple-icon-180x180.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="../assets/img/favicon/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="../assets/img/favicon/favicon-16x16.png" />
+  <link rel="icon" href="../assets/img/favicon/favicon.ico" />
+  <link rel="manifest" href="../assets/img/favicon/manifest.json" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
-      --primary: #4361ee;
-      --primary-dark: #3a0ca3;
-      --accent: #f0a500;
-      --bg-dark: #0f0e17;
-      --bg-card: rgba(255,255,255,0.05);
-      --text: #fffffe;
-      --text-muted: #a7a9be;
-      --gradient: linear-gradient(135deg, #3a0ca3 0%, #4361ee 50%, #4cc9f0 100%);
-      --glow: 0 0 30px rgba(67,97,238,0.3);
+      --primary: #6366f1;
+      --primary-dark: #4f46e5;
+      --accent: #f59e0b;
+      --bg-dark: #08070b;
+      --bg-card: rgba(255, 255, 255, 0.03);
+      --card-border: rgba(255, 255, 255, 0.06);
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --gradient: linear-gradient(135deg, #4f46e5 0%, #6366f1 50%, #3b82f6 100%);
+      --glow: 0 0 35px rgba(99, 102, 241, 0.25);
     }
 
     html { scroll-behavior: smooth; }
 
     body {
-      font-family: 'Outfit', sans-serif;
+      font-family: 'Inter', sans-serif;
       background: var(--bg-dark);
       color: var(--text);
       overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    h1, h2, h3, h4, h5, h6, .navbar .logo, .role, .btn, .stat .num, .skills-group-title {
+      font-family: 'Outfit', sans-serif;
     }
 
     /* ── Navbar ── */
@@ -36,14 +51,14 @@
       position: fixed; top: 0; left: 0; width: 100%; z-index: 100;
       display: flex; justify-content: space-between; align-items: center;
       padding: 18px 6%; backdrop-filter: blur(16px);
-      background: rgba(15,14,23,0.75); border-bottom: 1px solid rgba(255,255,255,0.06);
+      background: rgba(8, 7, 11, 0.7); border-bottom: 1px solid var(--card-border);
       transition: background 0.3s;
     }
     .navbar .logo { font-size: 1.5rem; font-weight: 700; background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
     .nav-links { display: flex; gap: 32px; list-style: none; }
     .nav-links a { color: var(--text-muted); text-decoration: none; font-weight: 500; transition: color 0.3s; position: relative; }
     .nav-links a:hover { color: var(--text); }
-    .nav-links a::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px; background: var(--accent); transition: width 0.3s; }
+    .nav-links a::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px; background: var(--primary); transition: width 0.3s; }
     .nav-links a:hover::after { width: 100%; }
     .menu-toggle { display: none; font-size: 1.5rem; color: var(--text); cursor: pointer; background: none; border: none; }
 
@@ -51,22 +66,22 @@
     .hero {
       min-height: 100vh; display: flex; align-items: center; justify-content: center;
       padding: 120px 6% 60px; position: relative;
-      background: radial-gradient(ellipse at 30% 50%, rgba(58,12,163,0.35) 0%, transparent 60%),
-                  radial-gradient(ellipse at 80% 30%, rgba(67,97,238,0.2) 0%, transparent 50%);
+      background: radial-gradient(ellipse at 30% 50%, rgba(99, 102, 241, 0.15) 0%, transparent 60%),
+                  radial-gradient(ellipse at 80% 30%, rgba(59, 130, 246, 0.1) 0%, transparent 50%);
     }
     .hero-content { display: flex; align-items: center; justify-content: space-between; max-width: 1200px; width: 100%; gap: 60px; }
     .hero-text { flex: 1; }
     .hero-text .greeting { font-size: 1.1rem; color: var(--accent); font-weight: 500; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; }
     .hero-text h1 { font-size: 3.2rem; font-weight: 800; line-height: 1.15; margin-bottom: 8px; }
-    .hero-text h1 .highlight { background: var(--accent); color: var(--bg-dark); padding: 2px 12px; border-radius: 6px; }
-    .hero-text .role { font-size: 1.4rem; color: var(--primary); font-weight: 600; margin-bottom: 16px; min-height: 36px; }
+    .hero-text h1 .highlight { background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .hero-text .role { font-size: 1.4rem; color: var(--primary); font-weight: 600; margin-top: 4px; margin-bottom: 16px; min-height: 36px; }
     .role .cursor-blink { animation: blink 0.7s infinite; }
     @keyframes blink { 0%,100%{ opacity:1; } 50%{ opacity:0; } }
     .hero-text p { color: var(--text-muted); font-size: 1.05rem; line-height: 1.7; max-width: 500px; margin-bottom: 28px; }
     .hero-socials { display: flex; gap: 14px; margin-bottom: 28px; }
     .hero-socials a {
       width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
-      background: var(--bg-card); border: 1px solid rgba(255,255,255,0.1); color: var(--text); font-size: 1.1rem;
+      background: var(--bg-card); border: 1px solid var(--card-border); color: var(--text); font-size: 1.1rem;
       transition: all 0.3s;
     }
     .hero-socials a:hover { background: var(--primary); border-color: var(--primary); transform: translateY(-3px); box-shadow: var(--glow); }
@@ -76,21 +91,21 @@
       cursor: pointer; transition: all 0.3s; text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
     }
     .btn-primary { background: var(--gradient); color: #fff; border: none; box-shadow: var(--glow); }
-    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(67,97,238,0.45); }
-    .btn-outline { background: transparent; color: var(--text); border: 2px solid rgba(255,255,255,0.2); }
-    .btn-outline:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(99, 102, 241, 0.45); }
+    .btn-outline { background: transparent; color: var(--text); border: 2px solid var(--card-border); }
+    .btn-outline:hover { border-color: var(--primary); color: var(--text); transform: translateY(-2px); box-shadow: var(--glow); }
 
     /* ── Video Card ── */
     .hero-video-wrapper {
       flex: 0 0 420px; height: 480px; border-radius: 20px; overflow: hidden; position: relative;
-      background: linear-gradient(145deg, rgba(67,97,238,0.2), rgba(58,12,163,0.3));
-      border: 2px solid rgba(255,255,255,0.08); box-shadow: 0 20px 60px rgba(0,0,0,0.4), var(--glow);
+      background: linear-gradient(145deg, rgba(99, 102, 241, 0.15), rgba(59, 130, 246, 0.1));
+      border: 1px solid var(--card-border); box-shadow: 0 20px 60px rgba(0,0,0,0.4), var(--glow);
     }
     .hero-video-wrapper video {
       width: 100%; height: 100%; object-fit: cover; display: block;
     }
     .video-overlay {
-      position: absolute; inset: 0; background: linear-gradient(to top, rgba(15,14,23,0.7) 0%, transparent 40%);
+      position: absolute; inset: 0; background: linear-gradient(to top, rgba(8, 7, 11, 0.7) 0%, transparent 40%);
       pointer-events: none;
     }
     .video-caption {
@@ -113,7 +128,7 @@
     /* Floating particles */
     .particles { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
     .particles span {
-      position: absolute; width: 4px; height: 4px; background: rgba(67,97,238,0.5); border-radius: 50%;
+      position: absolute; width: 4px; height: 4px; background: rgba(99, 102, 241, 0.4); border-radius: 50%;
       animation: float-up linear infinite;
     }
     @keyframes float-up {
@@ -139,7 +154,7 @@
     /* ── Skills ── */
     .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px,1fr)); gap: 20px; }
     .skill-card {
-      background: var(--bg-card); border: 1px solid rgba(255,255,255,0.06); border-radius: 14px;
+      background: var(--bg-card); border: 1px solid var(--card-border); border-radius: 14px;
       padding: 28px 16px; text-align: center; transition: all 0.3s;
     }
     .skill-card:hover { transform: translateY(-6px); border-color: var(--primary); box-shadow: var(--glow); }
@@ -149,37 +164,37 @@
     /* ── Projects ── */
     .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px,1fr)); gap: 28px; }
     .project-card {
-      background: var(--bg-card); border: 1px solid rgba(255,255,255,0.06); border-radius: 16px;
+      background: var(--bg-card); border: 1px solid var(--card-border); border-radius: 16px;
       overflow: hidden; transition: all 0.3s;
     }
     .project-card:hover { transform: translateY(-6px); box-shadow: var(--glow); border-color: var(--primary); }
-    .project-img { height: 200px; background: linear-gradient(135deg, var(--primary-dark), var(--primary)); display: flex; align-items: center; justify-content: center; font-size: 3rem; }
+    .project-img { height: 200px; background: rgba(255, 255, 255, 0.01); border-bottom: 1px solid var(--card-border); display: flex; align-items: center; justify-content: center; font-size: 3.2rem; }
     .project-body { padding: 24px; }
-    .project-body h3 { font-size: 1.2rem; margin-bottom: 8px; }
+    .project-body h3 { font-size: 1.2rem; margin-bottom: 8px; font-weight: 700; color: var(--text); }
     .project-body p { color: var(--text-muted); font-size: 0.92rem; line-height: 1.6; margin-bottom: 16px; }
     .project-tags { display: flex; flex-wrap: wrap; gap: 8px; }
-    .project-tags span { background: rgba(67,97,238,0.15); color: var(--primary); padding: 4px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: 500; }
+    .project-tags span { background: rgba(99, 102, 241, 0.12); color: var(--primary); padding: 4px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: 500; }
 
     /* ── Contact ── */
     .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
     .contact-info { display: flex; flex-direction: column; gap: 24px; }
     .contact-item { display: flex; align-items: center; gap: 16px; }
     .contact-item .icon-box {
-      width: 50px; height: 50px; border-radius: 12px; background: var(--bg-card); border: 1px solid rgba(255,255,255,0.08);
+      width: 50px; height: 50px; border-radius: 12px; background: var(--bg-card); border: 1px solid var(--card-border);
       display: flex; align-items: center; justify-content: center; color: var(--primary); font-size: 1.2rem;
     }
     .contact-item p { color: var(--text-muted); }
     .contact-item h4 { margin-bottom: 2px; }
     .contact-form { display: flex; flex-direction: column; gap: 16px; }
     .contact-form input, .contact-form textarea {
-      background: var(--bg-card); border: 1px solid rgba(255,255,255,0.08); border-radius: 10px;
+      background: var(--bg-card); border: 1px solid var(--card-border); border-radius: 10px;
       padding: 14px 18px; color: var(--text); font-family: inherit; font-size: 1rem; transition: border 0.3s; resize: vertical;
     }
     .contact-form input:focus, .contact-form textarea:focus { outline: none; border-color: var(--primary); }
 
     /* ── Footer ── */
     footer {
-      text-align: center; padding: 30px 6%; border-top: 1px solid rgba(255,255,255,0.06);
+      text-align: center; padding: 30px 6%; border-top: 1px solid var(--card-border);
       color: var(--text-muted); font-size: 0.9rem;
     }
 
