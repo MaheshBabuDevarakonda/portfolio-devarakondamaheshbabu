@@ -468,6 +468,44 @@
       font-family: 'Outfit', sans-serif; font-size: 1.1rem;
       letter-spacing: 2px; color: var(--text);
     }
+
+    /* ── Toast Notification ── */
+    .toast {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      padding: 16px 28px;
+      border-radius: 12px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: #fff;
+      z-index: 10000;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      pointer-events: none;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+    }
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+    .toast.success {
+      background: linear-gradient(135deg, #059669, #10b981);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+    .toast.error {
+      background: linear-gradient(135deg, #dc2626, #ef4444);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+    }
+    .contact-form .btn-primary:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none !important;
+    }
   </style>
 </head>
 <body>
@@ -676,9 +714,14 @@
       <!-- University -->
       <div class="timeline-card fade-in">
         <div class="timeline-header">
-          <div>
-            <h3>Anil Neerukonda Institute of Technology and Sciences</h3>
-            <div class="role-title">Bachelor of Technology in Computer Science &amp; Engineering – Data Science</div>
+          <div style="display: flex; align-items: center; gap: 15px;">
+            <div class="company-logo-wrapper">
+              <img src="https://anits.edu.in/wp-content/uploads/2025/02/cropped-icon-152x152.png" alt="ANITS Logo" class="company-logo">
+            </div>
+            <div>
+              <h3>Anil Neerukonda Institute of Technology and Sciences</h3>
+              <div class="role-title">Bachelor of Technology in Computer Science &amp; Engineering – Data Science</div>
+            </div>
           </div>
           <div class="company-meta">
             <span class="date-loc">2022 – 2026</span>
@@ -689,6 +732,56 @@
           <ul>
             <li>Consistently maintained an excellent academic standing with a CGPA of <strong>8.53 / 10.0</strong>.</li>
             <li><strong>Relevant Courseworks:</strong> Data Structures and Algorithms, Database Management Systems, Machine Learning, Web Technologies, Statistics for Data Science.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Intermediate -->
+      <div class="timeline-card fade-in">
+        <div class="timeline-header">
+          <div style="display: flex; align-items: center; gap: 15px;">
+            <div class="company-logo-wrapper">
+              <img src="https://srichaitanya.net/wp-content/uploads/2023/01/logo-1-1.jpg" alt="Sri Chaitanya Logo" class="company-logo">
+            </div>
+            <div>
+              <h3>Sri Chaitanya Junior College</h3>
+              <div class="role-title">Intermediate (MPC)</div>
+            </div>
+          </div>
+          <div class="company-meta">
+            <span class="date-loc">2020 – 2022</span>
+            <span class="date-loc">Andhra Pradesh</span>
+          </div>
+        </div>
+        <div class="timeline-body">
+          <ul>
+            <li>Completed Intermediate education with a focus on <strong>Mathematics, Physics, and Chemistry (MPC)</strong>.</li>
+            <li>Built a strong analytical and problem-solving foundation that paved the way for engineering studies.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Schooling -->
+      <div class="timeline-card fade-in">
+        <div class="timeline-header">
+          <div style="display: flex; align-items: center; gap: 15px;">
+            <div class="company-logo-wrapper">
+              <img src="https://bhashyam.in/images/logo.png" alt="Bhashyam Logo" class="company-logo">
+            </div>
+            <div>
+              <h3>Bhashyam High School</h3>
+              <div class="role-title">Secondary School Certificate (SSC)</div>
+            </div>
+          </div>
+          <div class="company-meta">
+            <span class="date-loc">2020</span>
+            <span class="date-loc">Andhra Pradesh</span>
+          </div>
+        </div>
+        <div class="timeline-body">
+          <ul>
+            <li>Completed SSC with excellent academic performance.</li>
+            <li>Developed a strong foundation in science and mathematics.</li>
           </ul>
         </div>
       </div>
@@ -800,13 +893,16 @@
         </div>
       </div>
       <form class="contact-form fade-in" id="contactForm">
-        <input type="text" placeholder="Your Name" required id="contactName">
-        <input type="email" placeholder="Your Email" required id="contactEmail">
-        <textarea rows="5" placeholder="Your Message" required id="contactMessage"></textarea>
-        <button type="submit" class="btn btn-primary" style="justify-content:center;"><i class="fas fa-paper-plane"></i> Send Message</button>
+        <input type="text" name="name" placeholder="Your Name" required id="contactName">
+        <input type="email" name="email" placeholder="Your Email" required id="contactEmail">
+        <textarea rows="5" name="message" placeholder="Your Message" required id="contactMessage"></textarea>
+        <button type="submit" class="btn btn-primary" id="contactSubmit" style="justify-content:center;"><i class="fas fa-paper-plane"></i> Send Message</button>
       </form>
     </div>
   </section>
+
+  <!-- Toast Notification -->
+  <div class="toast" id="toast"></div>
 
   <!-- Footer -->
   <footer>
@@ -886,6 +982,49 @@
         loader.classList.add('hidden');
       }, 300);
     });
+
+    // ── Contact Form Handler ──
+    (function() {
+      const form = document.getElementById('contactForm');
+      const toast = document.getElementById('toast');
+
+      function showToast(message, type) {
+        toast.textContent = message;
+        toast.className = 'toast ' + type + ' show';
+        setTimeout(() => {
+          toast.classList.remove('show');
+        }, 4000);
+      }
+
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const name = document.getElementById('contactName').value.trim();
+        const email = document.getElementById('contactEmail').value.trim();
+        const message = document.getElementById('contactMessage').value.trim();
+
+        if (!name || !email || !message) {
+          showToast('Please fill in all fields.', 'error');
+          return;
+        }
+
+        // Construct mailto link
+        const subject = encodeURIComponent('Portfolio Contact from ' + name);
+        const body = encodeURIComponent(
+          'Name: ' + name + '\n' +
+          'Email: ' + email + '\n\n' +
+          'Message:\n' + message
+        );
+        const mailtoLink = 'mailto:devarakondamaheshbabu237@gmail.com?subject=' + subject + '&body=' + body;
+
+        // Open email client
+        window.location.href = mailtoLink;
+
+        // Show success toast and reset form
+        showToast('✓ Opening your email client...', 'success');
+        form.reset();
+      });
+    })();
 
     // ── Scroll Scale Navigation ──
     (function() {
