@@ -258,6 +258,166 @@
       margin-bottom: 12px;
     }
 
+    /* ── Scroll Scale Navigation ── */
+    .scroll-scale {
+      position: fixed;
+      left: 32px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 90;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+      pointer-events: none;
+    }
+    .scroll-scale.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .scale-track {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+    }
+
+    /* The vertical rail behind everything */
+    .scale-rail {
+      position: absolute;
+      left: 50%;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: rgba(255, 255, 255, 0.06);
+      transform: translateX(-50%);
+      border-radius: 1px;
+    }
+
+    /* Animated progress fill on the rail */
+    .scale-rail-progress {
+      position: absolute;
+      left: 50%;
+      top: 0;
+      width: 2px;
+      height: 0%;
+      background: var(--gradient);
+      transform: translateX(-50%);
+      border-radius: 1px;
+      transition: height 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 0 8px rgba(0, 42, 255, 0.4);
+    }
+
+    /* Each section item on the scale */
+    .scale-item {
+      position: relative;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      padding: 14px 0;
+      z-index: 2;
+    }
+
+    /* The dot/node */
+    .scale-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      border: 2px solid rgba(255, 255, 255, 0.15);
+      background: var(--bg-dark);
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      z-index: 2;
+      flex-shrink: 0;
+    }
+
+    .scale-item:hover .scale-dot {
+      border-color: rgba(0, 42, 255, 0.6);
+      background: rgba(0, 42, 255, 0.15);
+      transform: scale(1.3);
+    }
+
+    .scale-item.active .scale-dot {
+      border-color: var(--primary);
+      background: var(--primary);
+      box-shadow: 0 0 12px rgba(0, 42, 255, 0.6), 0 0 24px rgba(0, 42, 255, 0.2);
+      transform: scale(1.3);
+    }
+
+    /* The label */
+    .scale-label {
+      position: absolute;
+      left: 24px;
+      white-space: nowrap;
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.2);
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      pointer-events: none;
+    }
+
+    .scale-item:hover .scale-label {
+      color: rgba(255, 255, 255, 0.5);
+      transform: translateX(4px);
+    }
+
+    .scale-item.active .scale-label {
+      color: var(--text);
+      transform: translateX(4px);
+      font-weight: 600;
+      text-shadow: 0 0 20px rgba(0, 42, 255, 0.3);
+    }
+
+    /* Tick marks between dots */
+    .scale-ticks {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 0;
+      z-index: 1;
+    }
+
+    .scale-tick {
+      width: 6px;
+      height: 1px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 0.5px;
+      transition: background 0.3s ease;
+    }
+
+    .scale-tick.filled {
+      background: rgba(0, 42, 255, 0.35);
+    }
+
+    /* Scroll percentage indicator */
+    .scale-percent {
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 600;
+      color: var(--primary);
+      letter-spacing: 1px;
+      margin-top: 12px;
+      opacity: 0.7;
+      transition: opacity 0.3s;
+    }
+
+    .scroll-scale:hover .scale-percent {
+      opacity: 1;
+    }
+
+    /* Hide on small screens and tablets */
+    @media (max-width: 1100px) {
+      .scroll-scale { display: none; }
+    }
+
     /* ── Glowing Background Blobs ── */
     .bg-glow-container {
       position: fixed;
@@ -326,6 +486,55 @@
     <div class="bg-glow blob-2"></div>
     <div class="bg-glow blob-3"></div>
   </div>
+
+  <!-- Scroll Scale Navigation -->
+  <nav class="scroll-scale" id="scrollScale" aria-label="Section navigation">
+    <div class="scale-track" id="scaleTrack">
+      <div class="scale-rail"></div>
+      <div class="scale-rail-progress" id="scaleProgress"></div>
+
+      <div class="scale-item active" data-target="hero">
+        <div class="scale-dot"></div>
+        <span class="scale-label">Home</span>
+      </div>
+      <div class="scale-ticks"><span class="scale-tick"></span><span class="scale-tick"></span><span class="scale-tick"></span></div>
+      <div class="scale-item" data-target="about">
+        <div class="scale-dot"></div>
+        <span class="scale-label">About</span>
+      </div>
+      <div class="scale-ticks"><span class="scale-tick"></span><span class="scale-tick"></span><span class="scale-tick"></span></div>
+      <div class="scale-item" data-target="experience">
+        <div class="scale-dot"></div>
+        <span class="scale-label">Work</span>
+      </div>
+      <div class="scale-ticks"><span class="scale-tick"></span><span class="scale-tick"></span><span class="scale-tick"></span></div>
+      <div class="scale-item" data-target="education">
+        <div class="scale-dot"></div>
+        <span class="scale-label">Education</span>
+      </div>
+      <div class="scale-ticks"><span class="scale-tick"></span><span class="scale-tick"></span><span class="scale-tick"></span></div>
+      <div class="scale-item" data-target="skills">
+        <div class="scale-dot"></div>
+        <span class="scale-label">Skills</span>
+      </div>
+      <div class="scale-ticks"><span class="scale-tick"></span><span class="scale-tick"></span><span class="scale-tick"></span></div>
+      <div class="scale-item" data-target="projects">
+        <div class="scale-dot"></div>
+        <span class="scale-label">Projects</span>
+      </div>
+      <div class="scale-ticks"><span class="scale-tick"></span><span class="scale-tick"></span><span class="scale-tick"></span></div>
+      <div class="scale-item" data-target="achievements">
+        <div class="scale-dot"></div>
+        <span class="scale-label">Achievements</span>
+      </div>
+      <div class="scale-ticks"><span class="scale-tick"></span><span class="scale-tick"></span><span class="scale-tick"></span></div>
+      <div class="scale-item" data-target="contact">
+        <div class="scale-dot"></div>
+        <span class="scale-label">Contact</span>
+      </div>
+    </div>
+    <div class="scale-percent" id="scalePercent">0%</div>
+  </nav>
 
   <!-- Navbar -->
   <nav class="navbar" id="navbar">
@@ -677,6 +886,94 @@
         loader.classList.add('hidden');
       }, 300);
     });
+
+    // ── Scroll Scale Navigation ──
+    (function() {
+      const scale = document.getElementById('scrollScale');
+      const scaleProgress = document.getElementById('scaleProgress');
+      const scalePercent = document.getElementById('scalePercent');
+      const scaleItems = document.querySelectorAll('.scale-item');
+      const scaleTicks = document.querySelectorAll('.scale-tick');
+      const sections = [];
+
+      // Collect section elements matching scale items
+      scaleItems.forEach(item => {
+        const id = item.dataset.target;
+        const el = document.getElementById(id);
+        if (el) sections.push({ id, el, item });
+      });
+
+      // Show/hide scale based on scroll position (hide at very top)
+      function updateScaleVisibility() {
+        if (window.scrollY > 100) {
+          scale.classList.add('visible');
+        } else {
+          scale.classList.remove('visible');
+        }
+      }
+
+      // Determine active section and update progress
+      function updateScale() {
+        updateScaleVisibility();
+
+        const scrollTop = window.scrollY;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const scrollPercent = docHeight > 0 ? Math.round((scrollTop / docHeight) * 100) : 0;
+
+        // Update percentage display
+        scalePercent.textContent = scrollPercent + '%';
+
+        // Update progress rail height
+        scaleProgress.style.height = scrollPercent + '%';
+
+        // Find active section (the one most visible in viewport)
+        let activeIdx = 0;
+        const viewportMid = scrollTop + window.innerHeight * 0.4;
+
+        for (let i = sections.length - 1; i >= 0; i--) {
+          if (sections[i].el.offsetTop <= viewportMid) {
+            activeIdx = i;
+            break;
+          }
+        }
+
+        // Update active states
+        scaleItems.forEach((item, idx) => {
+          item.classList.toggle('active', idx === activeIdx);
+        });
+
+        // Fill ticks up to active section
+        scaleTicks.forEach((tick, i) => {
+          const groupIdx = Math.floor(i / 3);
+          tick.classList.toggle('filled', groupIdx < activeIdx);
+        });
+      }
+
+      // Click to navigate
+      scaleItems.forEach(item => {
+        item.addEventListener('click', () => {
+          const target = document.getElementById(item.dataset.target);
+          if (target) {
+            target.scrollIntoView({ behavior: 'smooth' });
+          }
+        });
+      });
+
+      // Throttled scroll handler
+      let ticking = false;
+      window.addEventListener('scroll', () => {
+        if (!ticking) {
+          requestAnimationFrame(() => {
+            updateScale();
+            ticking = false;
+          });
+          ticking = true;
+        }
+      });
+
+      // Initial update
+      updateScale();
+    })();
   </script>
 </body>
 </html>
